@@ -9,7 +9,7 @@ export const Logo = () => {
   return (
     <Link href={'/'}>
       <section className="flex items-center gap-x-2 hover:opacity-75 transition">
-        <div className="bg-secondary rounded-full p-1 shrink-0 lg:mr-0 mr-4">
+        <div className="bg-secondary rounded-full p-1 shrink-0 lg:mr-0 mr-5">
           <Image alt="logo_image" src="/logo4.png" height={40} width={40} />
         </div>
         <div className={`${poppins.className} lg:block hidden`}>

@@ -38,7 +38,7 @@ export const Search = () => {
       <Input
         ref={ref}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value.trimStart())}
         className="focus-visible:ring-0 focus-visible:ring-offset-0 rounded-r-none "
         placeholder="search..."
       />

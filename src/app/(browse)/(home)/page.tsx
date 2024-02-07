@@ -6,5 +6,5 @@ interface HomeProps {
 }
 
 export default function Home({ searchParams }: HomeProps) {
-  return <section></section>;
+  return <section>sdfdsfsdfs</section>;
 }
