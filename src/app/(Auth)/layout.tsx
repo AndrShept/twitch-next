@@ -1,8 +1,16 @@
 import React, { ReactNode } from 'react';
 
+import { Logo } from '../(browse)/_components/Logo';
+
 const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <section className="h-full flex items-center justify-center">{children}</section>
+    <section className="h-full flex items-center justify-center">
+      <div className='flex-col flex  items-center gap-8'>
+        <Logo />
+
+        {children}
+      </div>
+    </section>
   );
 };
 
