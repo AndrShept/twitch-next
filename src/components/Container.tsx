@@ -9,8 +9,8 @@ export const Container = ({ children }: { children: ReactNode }) => {
 
   return (
     <section
-      className={cn('flex-1 lg:p-6 p-2 ml-60', {
-        'ml-[70px]': collapsed,
+      className={cn('flex-1 lg:p-6 p-2 lg:ml-60 flex flex-col ml-[70px] ', {
+     
       })}
     >
       {children}

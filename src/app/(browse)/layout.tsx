@@ -2,7 +2,7 @@
 import { Container } from '@/components/Container';
 import React, { ReactNode } from 'react';
 
-import { Navbar } from './_components/Navbar';
+import { Navbar } from './_components/navbar/Navbar';
 import { Sidebar } from './_components/sidebar/Sidebar';
 
 const layout = ({ children }: { children: ReactNode }) => {

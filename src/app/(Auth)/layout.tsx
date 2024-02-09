@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { Logo } from '../(browse)/_components/Logo';
+import { Logo } from '../(browse)/_components/navbar/Logo';
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (

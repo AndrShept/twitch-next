@@ -4,7 +4,7 @@ import { ActionTooltip } from '@/components/ActionTooltip';
 import { Button } from '@/components/ui/button';
 import { useSidebar } from '@/store/use-sidebar';
 import { ArrowLeftFromLineIcon, ArrowRightToLineIcon } from 'lucide-react';
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
 export const Toggle = () => {
@@ -12,15 +12,13 @@ export const Toggle = () => {
   const { collapsed, onCollapse, onExpand } = useSidebar((state) => state);
   const label = collapsed ? 'Expand' : 'Collapse';
 
-
   useEffect(() => {
     if (isMobile) {
       onCollapse();
-    } else {
+    } else { 
       onExpand();
     }
   }, [isMobile, onCollapse, onExpand]);
-
 
   return (
     <>

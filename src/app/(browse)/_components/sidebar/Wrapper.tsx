@@ -11,7 +11,8 @@ export const Wrapper = ({ children }: { children: ReactNode }) => {
       className={cn(
         'fixed flex flex-col inset-y-0 z-50 w-60 top-20 bg-secondary/60 border-r  ',
         {
-          'w-[70px] ': collapsed,
+          'w-[70px] transition-all': collapsed,
+          '  transition-all ': !collapsed,
         },
       )}
     >

@@ -1,3 +1,4 @@
+import { UserAvatarSkeleton } from '@/components/UserAvatar';
 import { Button } from '@/components/ui/button';
 import { SignInButton, UserButton, currentUser } from '@clerk/nextjs';
 import { ClapperboardIcon } from 'lucide-react';
@@ -6,6 +7,7 @@ import React from 'react';
 
 export const Actions = async () => {
   const user = await currentUser();
+
 
   return (
     <section className="flex items-center justify-end gap-x-2 ">
@@ -27,7 +29,7 @@ export const Actions = async () => {
               <span className="ml-2 lg:block hidden">Dashboard</span>
             </Link>
           </Button>
-          <UserButton afterSignOutUrl='/'/>
+          <UserButton afterSignOutUrl="/" />
         </div>
       )}
     </section>
