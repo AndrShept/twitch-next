@@ -10,6 +10,7 @@ import { UserItem } from './UserItem';
 
 export const Recommended = () => {
   const { data: users, error } = useRecommended();
+  
   const collapsed = useSidebar((state) => state.collapsed);
   const showLabel = !collapsed && !!users;
 
@@ -21,7 +22,7 @@ export const Recommended = () => {
           <p className="text-sm text-muted-foreground">Recommended</p>
         </div>
       )}
-      <ul>
+      <ul className="lg:p-2 p-1">
         {users?.map((user) => (
           <UserItem
             key={user.id}
