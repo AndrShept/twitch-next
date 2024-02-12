@@ -1,10 +1,17 @@
 import { currentUser } from '@clerk/nextjs';
 
-import { prisma } from './prisma';
+import { prisma } from '../db/prisma';
 
-export const getUser = async (username: string) => {
+export const getUserByUsername = async (username: string) => {
   const user = await prisma.user.findFirst({
     where: { username },
+  });
+  return user;
+};
+
+export const getUserById = async (id: string) => {
+  const user = await prisma.user.findUnique({
+    where: { id },
   });
   return user;
 };
@@ -27,5 +34,5 @@ export const createUser = async () => {
     });
     return newUser;
   }
-  return
+  return;
 };

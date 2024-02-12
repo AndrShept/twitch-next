@@ -1,19 +1,18 @@
-import { getProfile } from '@/lib/auth-service';
-import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/db/prisma';
 import { currentUser } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 
 export const GET = async () => {
-  const profile = await currentUser();
+  const self = await currentUser();
 
-  if (!profile) {
+  if (!self) {
     const users = await prisma.user.findMany({
       orderBy: { createdAt: 'desc' },
     });
     return NextResponse.json(users, { status: 200 });
   }
   const users = await prisma.user.findMany({
-    where: { NOT: { externalUserId: profile.id } },
+    where: { NOT: { externalUserId: self.id } },
     orderBy: { createdAt: 'desc' },
   });
 

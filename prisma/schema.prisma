@@ -18,8 +18,11 @@ model User {
   externalUserId String  @unique
   bio            String? @db.Text
 
-  following  Follow[] @relation("Following")
-  followedBy Follow[] @relation("FollowedBy")
+  follower  Follow[] @relation(name: "follower")
+  following Follow[] @relation(name: "following")
+
+  blockUser      Block[] @relation(name: "blockUser")
+  blockingByUser Block[] @relation(name: "blockingByUser")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -30,15 +33,31 @@ model User {
 model Follow {
   id String @id @default(uuid())
 
-  followerId  String
-  followingId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  follower  User? @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
-  following User? @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
+  followerUser  User?   @relation(name: "follower", fields: [followerId], references: [id])
+  followerId    String?
+  followingUser User?   @relation(name: "following", fields: [followingId], references: [id])
+  followingId   String?
+
+  @@index([followerId])
+  @@index([followingId])
+  @@map("followers")
+}
+
+model Block {
+  id String @id @default(uuid())
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([followerId])
-  @@index([followingId])
+  blockUser        User?   @relation(name: "blockUser", fields: [blockUserId], references: [id])
+  blockUserId      String?
+  blockingUserBy   User?   @relation(name: "blockingByUser", fields: [blockingUserById], references: [id])
+  blockingUserById String?
+
+  @@index([blockingUserById])
+  @@index([blockUserId])
+  @@map("blocks")
 }

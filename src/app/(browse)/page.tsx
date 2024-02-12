@@ -1,4 +1,4 @@
-import { createUser } from '@/lib/user-service';
+import { createUser } from '@/lib/services/user-service';
 import { currentUser } from '@clerk/nextjs';
 
 export default async function Home() {
