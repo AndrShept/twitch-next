@@ -18,8 +18,8 @@ model User {
   externalUserId String  @unique
   bio            String? @db.Text
 
-  follower  Follow[] @relation(name: "follower")
-  following Follow[] @relation(name: "following")
+  following  Follow[] @relation(name: "following")
+  followedBy Follow[] @relation(name: "followedBy")
 
   blockUser      Block[] @relation(name: "blockUser")
   blockingByUser Block[] @relation(name: "blockingByUser")
@@ -36,13 +36,13 @@ model Follow {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  followerUser  User?   @relation(name: "follower", fields: [followerId], references: [id])
-  followerId    String?
-  followingUser User?   @relation(name: "following", fields: [followingId], references: [id])
-  followingId   String?
+  followingUser  User?   @relation(name: "following", fields: [followingId], references: [id])
+  followingId    String?
+  followedByUser User?   @relation(name: "followedBy", fields: [followedById], references: [id])
+  followedById   String?
 
-  @@index([followerId])
   @@index([followingId])
+  @@index([followedById])
   @@map("followers")
 }
 

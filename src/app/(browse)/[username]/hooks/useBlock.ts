@@ -9,7 +9,9 @@ export const useBlock = (userId: string) => {
     startTransition(async () => {
       const block = await blockUser(userId);
       if (block?.id) {
-        toast.success(`Success blocking user ${block.blockUser?.username}`);
+        toast.success(
+          `Success blocking user ${block.blockingUserBy?.username}`,
+        );
       }
     });
   };

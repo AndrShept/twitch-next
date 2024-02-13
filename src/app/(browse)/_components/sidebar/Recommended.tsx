@@ -1,20 +1,28 @@
 'use client';
 
-import { UserAvatarSkeleton } from '@/components/UserAvatar';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useRecommended } from '@/hooks/useRecommended';
+import { useRecommendedNext } from '@/hooks/useRecommended';
 import { useSidebar } from '@/store/use-sidebar';
+import { User } from '@prisma/client';
+import { notFound } from 'next/navigation';
 import React from 'react';
 
 import { UserItem } from './UserItem';
 
-export const Recommended = () => {
-  const { data: users, error } = useRecommended();
-  
+interface RecommendedProps {
+  data: User[];
+}
+
+export const Recommended = ({ data: users }: RecommendedProps) => {
+
+  // const { data: users, error, isPending } = useRecommended();
+  if (!users) {
+    notFound();
+  }
   const collapsed = useSidebar((state) => state.collapsed);
   const showLabel = !collapsed && !!users;
 
-  if (error) return 'An error has occurred: ' + error.message;
+  // if (error) return 'An error has occurred: ' + error.message;
+
   return (
     <div>
       {showLabel && (
@@ -32,18 +40,6 @@ export const Recommended = () => {
           />
         ))}
       </ul>
-    </div>
-  );
-};
-
-export const RecommendedSkeleton = () => {
-  return (
-    <div className="flex items-center gap-4  ">
-      <div>
-        <UserAvatarSkeleton size={'md'} />
-      </div>
-
-      <Skeleton className=" h-6 w-full   hidden lg:block" />
     </div>
   );
 };

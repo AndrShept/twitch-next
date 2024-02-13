@@ -1,3 +1,5 @@
+'use client'
+import { HoverCardAction } from '@/components/HoverCardAction';
 import { LiveBadge } from '@/components/LiveBadge';
 import { UserAvatar } from '@/components/UserAvatar';
 import { Button } from '@/components/ui/button';
@@ -33,12 +35,15 @@ export const UserItem = ({ imageUrl, username, isLive }: UserItemProps) => {
             collapsed && 'justify-center',
           )}
         >
-          <UserAvatar
-            imageUrl={imageUrl}
-            username={username}
-            isLive={isLive}
-            showBadge
-          />
+          <HoverCardAction>
+            <UserAvatar
+            
+              imageUrl={imageUrl}
+              username={username}
+              isLive={isLive}
+              showBadge
+            />
+          </HoverCardAction>
           {!collapsed && <p className="break-all line-clamp-1">{username}</p>}
           {!collapsed && isLive && <LiveBadge className="ml-auto" />}
         </div>
@@ -46,5 +51,3 @@ export const UserItem = ({ imageUrl, username, isLive }: UserItemProps) => {
     </Button>
   );
 };
-
-

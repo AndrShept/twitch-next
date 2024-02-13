@@ -19,7 +19,7 @@ export const isFollowingUser = async (userId: string) => {
       return true;
     }
     const existingFollow = await prisma.follow.findFirst({
-      where: { followerId: self.id, followingId: userId },
+      where: { followingId: self.id, followedById: userId },
     });
     if (existingFollow) {
       return true;
@@ -44,21 +44,20 @@ export const followUser = async (id: string) => {
   }
 
   const existingFollow = await prisma.follow.findFirst({
-    where: { followerId: self.id, followingId: otherUser.id },
+    where: { followingId: self.id, followedById: id },
   });
   if (existingFollow) {
     await prisma.follow.deleteMany({
-      where: { followerId: self.id, followingId: otherUser.id },
+      where: { followingId: self.id, followedById: id },
     });
     revalidatePath(`/${self.username}`);
   } else {
     const followedUser = await prisma.follow.create({
-      data: { followerId: self.id, followingId: otherUser.id },
-      include: { followerUser: true, followingUser: true },
+      data: { followingId: self.id, followedById: id },
+      include: { followingUser: true, followedByUser: true },
     });
 
     revalidatePath(`/${self.username}`);
     return followedUser;
   }
 };
-

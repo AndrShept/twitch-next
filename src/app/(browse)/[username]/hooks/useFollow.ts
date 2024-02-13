@@ -9,9 +9,9 @@ export const useFollow = (userId: string) => {
     startTransition(async () => {
       const follow = await followUser(userId);
 
-      if (follow?.followingUser) {
+      if (follow?.followingId) {
         toast.success(
-          `Success added new follow ${follow?.followingUser?.username}`,
+          `Success added new follow ${follow?.followedByUser?.username}`,
         );
       }
     });

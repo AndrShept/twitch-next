@@ -1,8 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
+import { useHoverCard } from '@/store/use-hoverCard';
 import { useSidebar } from '@/store/use-sidebar';
 import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
+import { useHover } from 'usehooks-ts';
 
 import { LiveBadge } from './LiveBadge';
 import { Skeleton } from './ui/skeleton';
@@ -36,9 +38,13 @@ export const UserAvatar = ({
 }: UserAvatarProps) => {
   const collapsed = useSidebar((state) => state.collapsed);
   const canShowBadge = showBadge && isLive && collapsed;
+  const { setHoverCar } = useHoverCard();
 
   return (
-    <div className="relative">
+    <div
+      onMouseEnter={() => setHoverCar({ username, imageUrl })}
+      className="relative"
+    >
       <Avatar
         className={cn(
           isLive && 'ring-2 ring-emerald-600 ',

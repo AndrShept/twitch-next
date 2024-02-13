@@ -1,10 +1,8 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import React, { useTransition } from 'react';
-import { toast } from 'sonner';
+import React from 'react';
 
-import { followUser } from '../actions/follow-service';
 import { useFollow } from '../hooks/useFollow';
 
 interface FollowButtonProps {
