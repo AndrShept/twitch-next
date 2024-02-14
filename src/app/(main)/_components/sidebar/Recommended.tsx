@@ -1,6 +1,5 @@
 'use client';
 
-import { useRecommendedNext } from '@/hooks/useRecommended';
 import { useSidebar } from '@/store/use-sidebar';
 import { User } from '@prisma/client';
 import { notFound } from 'next/navigation';
@@ -14,14 +13,13 @@ interface RecommendedProps {
 
 export const Recommended = ({ data: users }: RecommendedProps) => {
 
-  // const { data: users, error, isPending } = useRecommended();
+
   if (!users) {
     notFound();
   }
   const collapsed = useSidebar((state) => state.collapsed);
   const showLabel = !collapsed && !!users;
 
-  // if (error) return 'An error has occurred: ' + error.message;
 
   return (
     <div>

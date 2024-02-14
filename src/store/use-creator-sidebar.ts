@@ -1,14 +1,12 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
-interface SidebarStore {
+interface CreatorSidebarStore {
   collapsed: boolean;
   onExpand: () => void;
   onCollapse: () => void;
 }
 
-export const useSidebar = create<SidebarStore>((set) => {
-
+export const useCreatorSidebar = create<CreatorSidebarStore>((set) => {
   return {
     collapsed: false,
     onExpand: () => set(() => ({ collapsed: false })),

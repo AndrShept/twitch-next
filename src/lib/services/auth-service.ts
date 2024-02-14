@@ -16,3 +16,17 @@ export const getSelfUser = async () => {
   }
   return user;
 };
+export const getSelfByUserName = async () => {
+  const self = await currentUser();
+  if (!self || !self.username) {
+    throw new Error('Unauthorized');
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { username: self.username },
+  });
+  if (!user) {
+    throw new Error('User not found');
+  }
+  return user;
+};

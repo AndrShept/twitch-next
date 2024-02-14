@@ -18,8 +18,8 @@ export const ActionTooltip = ({
   side = 'top',
 }: ActionTooltipProps) => {
   return (
-    <TooltipProvider delayDuration={200}>
-      <Tooltip>
+    <TooltipProvider delayDuration={200} >
+      <Tooltip >
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent side={side}>
           <p>{label}</p>

@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { UserAvatarSkeleton } from '@/components/UserAvatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
@@ -32,7 +33,11 @@ export const Wrapper = ({ children }: { children: ReactNode }) => {
 
 export const SidebarSkeleton = () => {
   return (
-    <aside className="fixed flex flex-col items-center   inset-y-0 z-50 lg:w-60 top-20 bg-secondary/60 border-r  w-[70px] p-3 ">
+    <aside
+      className={cn(
+        'fixed flex flex-col items-center   inset-y-0 z-50 lg:w-60 w-[70px] top-20 bg-secondary/60 border-r   p-3 ',
+      )}
+    >
       <ul className="lg:mt-7 mt-3 flex flex-col lg:items-stretch items-center gap-4  w-full">
         {[...Array(6)].map((_, idx) => (
           <RecommendedSkeleton key={idx} />

@@ -1,10 +1,11 @@
 'use server'
 import { prisma } from '@/lib/db/prisma';
 import { getSelfUser } from '@/lib/services/auth-service';
+import { currentUser } from '@clerk/nextjs';
 
 export const getRecommended = async () => {
 
-  const self = await getSelfUser();
+  const self = await currentUser()
 
   if (!self) {
     const users = await prisma.user.findMany({
@@ -13,7 +14,7 @@ export const getRecommended = async () => {
     return users;
   }
   const users = await prisma.user.findMany({
-    where: { NOT: { id: self.id } },
+    where: { NOT: { externalUserId: self.id } },
     orderBy: { createdAt: 'desc' },
   });
 
