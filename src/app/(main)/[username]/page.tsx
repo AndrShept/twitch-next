@@ -4,8 +4,8 @@ import React from 'react';
 
 import { BlockButton } from './_components/BlockButton';
 import { FollowButton } from './_components/FollowButton';
-import { isBlockingUser } from './actions/block-service';
-import { isFollowingUser } from './actions/follow-service';
+import { isBlockingUser } from '../actions/block-service';
+import { isFollowingUser } from '../actions/follow-service';
 
 interface UserPageProps {
   params: { username: string };

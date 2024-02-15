@@ -8,13 +8,15 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model User {
-  id             String  @id @default(uuid())
-  username       String  @unique
-  imageUrl       String  @db.Text
+  id       String @id @default(uuid())
+  username String @unique
+  imageUrl String @db.Text
+
   externalUserId String  @unique
   bio            String? @db.Text
 
@@ -24,22 +26,49 @@ model User {
   blockUser      Block[] @relation(name: "blockUser")
   blockingByUser Block[] @relation(name: "blockingByUser")
 
+  stream Stream?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
 }
 
-model Follow {
-  id String @id @default(uuid())
+model Stream {
+  id           String  @id @default(uuid())
+  name         String  @db.Text
+  thumbnailUrl String? @db.Text
+
+  ingressId String? @unique
+  serverUrl String? @db.Text
+  streamKey String? @db.Text
+
+  isLive              Boolean @default(false)
+  isChatEnabled       Boolean @default(true)
+  isChatDelayed       Boolean @default(false)
+  isChatFollowersOnly Boolean @default(false)
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  followingUser  User?   @relation(name: "following", fields: [followingId], references: [id])
-  followingId    String?
-  followedByUser User?   @relation(name: "followedBy", fields: [followedById], references: [id])
-  followedById   String?
+  @@index([userId])
+  @@index([ingressId])
+  @@fulltext([name])
+}
+
+model Follow {
+  id           String  @id @default(uuid())
+  followingId  String?
+  followedById String?
+
+  followingUser  User? @relation(name: "following", fields: [followingId], references: [id])
+  followedByUser User? @relation(name: "followedBy", fields: [followedById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([followingId])
   @@index([followedById])
@@ -47,15 +76,15 @@ model Follow {
 }
 
 model Block {
-  id String @id @default(uuid())
+  id               String  @id @default(uuid())
+  blockUserId      String?
+  blockingUserById String?
+
+  blockUser      User? @relation(name: "blockUser", fields: [blockUserId], references: [id])
+  blockingUserBy User? @relation(name: "blockingByUser", fields: [blockingUserById], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  blockUser        User?   @relation(name: "blockUser", fields: [blockUserId], references: [id])
-  blockUserId      String?
-  blockingUserBy   User?   @relation(name: "blockingByUser", fields: [blockingUserById], references: [id])
-  blockingUserById String?
 
   @@index([blockingUserById])
   @@index([blockUserId])

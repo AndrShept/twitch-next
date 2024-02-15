@@ -38,7 +38,7 @@ export const SidebarSkeleton = () => {
         'fixed flex flex-col items-center   inset-y-0 z-50 lg:w-60 w-[70px] top-20 bg-secondary/60 border-r   p-3 ',
       )}
     >
-      <ul className="lg:mt-7 mt-3 flex flex-col lg:items-stretch items-center gap-4  w-full">
+      <ul className="lg:mt-7 flex flex-col lg:items-stretch items-center gap-4  w-full">
         {[...Array(6)].map((_, idx) => (
           <RecommendedSkeleton key={idx} />
         ))}

@@ -24,8 +24,9 @@ export const UserItem = ({ imageUrl, username, isLive }: UserItemProps) => {
     <Button
       asChild
       variant={'ghost'}
-      className={cn('w-full h-12 justify-start', {
+      className={cn('w-full h-12 justify-start ', {
         'justify-center': collapsed,
+        'bg-secondary' : isActive
       })}
     >
       <Link href={href}>

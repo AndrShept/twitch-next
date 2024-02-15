@@ -30,6 +30,7 @@ export const createUser = async () => {
           profile.username ||
           `${profile.firstName}${profile.lastName}` ||
           profile.emailAddresses[0].emailAddress,
+          stream: {create : {name : `${profile.username}'s stream`}}
       },
     });
     return newUser;
