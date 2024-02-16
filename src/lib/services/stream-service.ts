@@ -1,4 +1,4 @@
-import { prisma } from './db/prisma';
+import { prisma } from '../db/prisma';
 
 export const getStreamByUserId = async (userId: string) => {
   const stream = await prisma.stream.findUnique({

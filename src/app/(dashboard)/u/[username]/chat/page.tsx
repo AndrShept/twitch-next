@@ -1,5 +1,5 @@
 import { getSelfUser } from '@/lib/services/auth-service';
-import { getStreamByUserId } from '@/lib/stream-service';
+import { getStreamByUserId } from '@/lib/services/stream-service';
 import React from 'react';
 
 import { ToggleCard } from './_components/ToggleCard';
@@ -12,7 +12,7 @@ const ChatPage = async () => {
     throw new Error('Stream not found');
   }
   return (
-    <section className="p-6 max-w-3xl mx-auto">
+    <section className="p-6 max-w-2xl mx-auto">
       <div className="mb-4">
         <h1 className="text-2xl font-bold">Chat settings</h1>
       </div>

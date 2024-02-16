@@ -1,5 +1,5 @@
-// import { getRecommended } from '@/lib/services/recommended-service';
-import { getRecommended } from '@/app/(browse)/_components/sidebar/actions/get-recommended';
+
+import { getRecommended } from '@/app/(main)/_components/sidebar/actions/get-recommended';
 import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState, useTransition } from 'react';

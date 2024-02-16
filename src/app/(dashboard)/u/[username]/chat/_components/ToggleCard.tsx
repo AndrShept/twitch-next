@@ -32,7 +32,7 @@ export const ToggleCard = ({
   if (!isMount) return <Skeleton className="h-20 w-full rounded-xl" />;
 
   return (
-    <section className="rounded-xl bg-secondary/50 p-6 border">
+    <section className="rounded-xl bg-secondary/50 p-6 ">
       <div className="flex items-center justify-between">
         <p className="font-semibold sm:text-base text-sm  text-muted-foreground ">
           {label}
