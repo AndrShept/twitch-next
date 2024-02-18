@@ -1,8 +1,8 @@
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
-import { updateStream } from '../actions/stream';
-import { FieldTypes } from '../chat/_components/ToggleCard';
+import { updateStream } from '../app/actions/stream';
+import { FieldTypes } from '../app/(dashboard)/u/[username]/chat/_components/ToggleCard';
 
 interface useUpdateStreamSettingsProps {
   field: FieldTypes;

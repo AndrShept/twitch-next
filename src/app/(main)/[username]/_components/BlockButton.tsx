@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import React from 'react';
 
-import { useBlock } from '../../hooks/useBlock';
+import { useBlock } from '../../../../hooks/useBlock';
 
 interface BlockButtonProps {
   userId: string;

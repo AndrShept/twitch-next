@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import React, { useEffect, useState } from 'react';
 
-import { useUpdateStreamSettings } from '../../hooks/useUpdateStreamSettings';
+import { useUpdateStreamSettings } from '../../../../../../hooks/useUpdateStreamSettings';
 
 export type FieldTypes =
   | 'isChatEnabled'

@@ -6,6 +6,9 @@ export const getUserByUsername = async (username: string) => {
   const user = await prisma.user.findFirst({
     where: { username },
   });
+  if(!user){
+    throw new Error('User not found')
+  }
   return user;
 };
 
@@ -13,6 +16,9 @@ export const getUserById = async (id: string) => {
   const user = await prisma.user.findUnique({
     where: { id },
   });
+  if(!user){
+    throw new Error('User not found')
+  }
   return user;
 };
 

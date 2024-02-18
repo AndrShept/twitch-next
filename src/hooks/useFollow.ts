@@ -1,7 +1,7 @@
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
-import { followUser } from '../actions/follow-service';
+import { followUser } from '../app/actions/follow';
 
 export const useFollow = (userId: string) => {
   const [isPending, startTransition] = useTransition();

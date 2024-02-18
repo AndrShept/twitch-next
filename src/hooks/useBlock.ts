@@ -1,7 +1,7 @@
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
-import { blockUser } from '../actions/block-service';
+import { blockUser } from '../app/actions/block';
 
 export const useBlock = (userId: string) => {
   const [isPending, startTransition] = useTransition();

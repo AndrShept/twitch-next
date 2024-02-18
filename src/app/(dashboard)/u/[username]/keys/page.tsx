@@ -4,9 +4,9 @@ import { getStreamByUserId } from '@/lib/services/stream-service';
 import { RefreshCcwIcon } from 'lucide-react';
 import React from 'react';
 
+import { ConnectModal } from './_components/ConnectModal';
 import { KeyCard } from './_components/KeyCard';
 import { UrlCard } from './_components/UrlCard';
-import { ConnectModal } from './_components/ConnectModal';
 
 const KeysPage = async () => {
   const self = await getSelfUser();
@@ -20,7 +20,7 @@ const KeysPage = async () => {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Keys & URLs</h1>
 
-        <ConnectModal/>
+        <ConnectModal />
       </div>
       <div className="space-y-4">
         <UrlCard value={stream.serverUrl || 'default URL'} />

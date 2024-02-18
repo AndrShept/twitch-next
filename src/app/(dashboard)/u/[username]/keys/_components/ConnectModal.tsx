@@ -21,7 +21,7 @@ import { cn } from '@/lib/utils';
 import { AlertTriangleIcon, RefreshCcwIcon } from 'lucide-react';
 import React from 'react';
 
-import { useGenerateIngress } from '../../hooks/useGenerateIngress';
+import { useGenerateIngress } from '../../../../../../hooks/useGenerateIngress';
 
 export const ConnectModal = () => {
   const { isPending, onSubmit, value, setValue, RTMP, WHIP, ref } =

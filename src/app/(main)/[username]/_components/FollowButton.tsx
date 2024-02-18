@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import React from 'react';
 
-import { useFollow } from '../../hooks/useFollow';
+import { useFollow } from '../../../../hooks/useFollow';
 
 interface FollowButtonProps {
   userId: string;
