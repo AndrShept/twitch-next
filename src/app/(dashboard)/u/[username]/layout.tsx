@@ -20,7 +20,7 @@ const CreatorLayout = ({ params, children }: CreatorLayoutProps) => {
       <Navbar />
       <div className="h-full flex pt-20 ">
         <Sidebar />
-        <div className="flex-1 ml-[70px] lg:p-6 p-4">{children}</div>
+        <div className="flex-1 lg:ml-60 ml-[70px] ">{children}</div>
       </div>
     </>
   );

@@ -15,9 +15,9 @@ export const isBlockingUser = async (userId: string) => {
       throw new Error('User not found');
     }
 
-    if (user.id === self.id) {
-      return true;
-    }
+    // if (user.id === self.id) {
+    //   return true;
+    // }
     const existingBlock = await prisma.block.findFirst({
       where: { blockUserId: self.id, blockingUserById: userId },
     });

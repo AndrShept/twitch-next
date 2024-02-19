@@ -5,9 +5,10 @@ import { prisma } from '../db/prisma';
 export const getUserByUsername = async (username: string) => {
   const user = await prisma.user.findFirst({
     where: { username },
+    include: { stream: true },
   });
-  if(!user){
-    throw new Error('User not found')
+  if (!user) {
+    throw new Error('User not found');
   }
   return user;
 };
@@ -15,9 +16,10 @@ export const getUserByUsername = async (username: string) => {
 export const getUserById = async (id: string) => {
   const user = await prisma.user.findUnique({
     where: { id },
+    include: { stream: true },
   });
-  if(!user){
-    throw new Error('User not found')
+  if (!user) {
+    throw new Error('User not found');
   }
   return user;
 };
@@ -36,7 +38,7 @@ export const createUser = async () => {
           profile.username ||
           `${profile.firstName}${profile.lastName}` ||
           profile.emailAddresses[0].emailAddress,
-          stream: {create : {name : `${profile.username}'s stream`}}
+        stream: { create: { name: `${profile.username}'s stream` } },
       },
     });
     return newUser;
