@@ -37,7 +37,7 @@ export const UserAvatar = ({
   size,
 }: UserAvatarProps) => {
   const collapsed = useSidebar((state) => state.collapsed);
-  const canShowBadge = showBadge && isLive && collapsed;
+  const canShowBadge = showBadge && isLive;
   const { setHoverCar } = useHoverCard();
 
   return (

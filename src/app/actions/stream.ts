@@ -6,24 +6,19 @@ import { Stream } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
 export const updateStream = async (values: Partial<Stream>) => {
-
-  const { isChatDelayed, isChatEnabled, isChatFollowersOnly } = values;
-
   try {
     const self = await getSelfUser();
-    const selfStream = await prisma.stream.findUnique({
+    const stream = await prisma.stream.findUnique({
       where: { userId: self.id },
     });
-    if (!selfStream) {
+    if (!stream) {
       throw new Error('Stream not found');
     }
 
     const updatedStream = await prisma.stream.update({
-      where: { id: selfStream.id },
+      where: { id: stream.id },
       data: {
-        isChatDelayed,
-        isChatEnabled,
-        isChatFollowersOnly,
+        ...values,
       },
     });
 
