@@ -19,6 +19,8 @@ export const UrlCard = ({ value }: UrlCardProps) => {
           <CopyButton value={value} />
         </div>
       </section>
+
+      
     </article>
   );
 };

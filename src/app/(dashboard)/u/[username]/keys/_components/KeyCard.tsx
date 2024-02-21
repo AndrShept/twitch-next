@@ -4,7 +4,7 @@ import { ActionTooltip } from '@/components/ActionTooltip';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { CopyButton } from '../../../../../../components/CopyButton';
 
@@ -14,6 +14,7 @@ interface KeyCardProps {
 
 export const KeyCard = ({ value }: KeyCardProps) => {
   const [isShow, setIsShow] = useState(false);
+
   return (
     <article className="rounded-xl w-full p-6 bg-secondary/50 flex flex-col gap-2">
       <section className="flex items-center gap-x-10">
@@ -28,7 +29,7 @@ export const KeyCard = ({ value }: KeyCardProps) => {
             placeholder="Server Key"
           />
         </div>
-        <div >
+        <div>
           <ActionTooltip label={!isShow ? 'Show' : 'Hide'}>
             <Button
               className="size-[30px] p-1.5 text-muted-foreground"
@@ -42,6 +43,8 @@ export const KeyCard = ({ value }: KeyCardProps) => {
           <CopyButton value={value} />
         </div>
       </section>
+
+
     </article>
   );
 };

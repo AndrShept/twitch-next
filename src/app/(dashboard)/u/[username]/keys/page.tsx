@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { getSelfUser } from '@/lib/services/auth-service';
 import { getStreamByUserId } from '@/lib/services/stream-service';
 import { RefreshCcwIcon } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ConnectModal } from './_components/ConnectModal';
 import { KeyCard } from './_components/KeyCard';
@@ -15,6 +15,7 @@ const KeysPage = async () => {
     throw new Error('Stream not found');
   }
 
+
   return (
     <section className="p-6 max-w-2xl mx-auto">
       <div className="flex items-center justify-between mb-4">
@@ -26,6 +27,8 @@ const KeysPage = async () => {
         <UrlCard value={stream.serverUrl || 'default URL'} />
         <KeyCard value={stream.streamKey || 'default KEY'} />
       </div>
+
+
     </section>
   );
 };

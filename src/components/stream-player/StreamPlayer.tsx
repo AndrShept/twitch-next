@@ -7,6 +7,7 @@ import { LiveKitRoom } from '@livekit/components-react';
 import { Stream, User } from '@prisma/client';
 import React from 'react';
 
+import { AboutCard } from './AboutCard';
 import { Chat, ChatSkeleton } from './Chat';
 import { ChatToggle } from './ChatToggle ';
 import { Header, HeaderSkeleton } from './Header';
@@ -14,7 +15,7 @@ import { InfoCard } from './InfoCard';
 import { Video, VideoSkeleton } from './Video';
 
 interface StreamPlayerProps {
-  user: User & { stream: Stream | null };
+  user: User & { stream: Stream | null; _count: { followedBy: number } };
   stream: Stream;
   isFollowing: boolean;
 }
@@ -60,9 +61,20 @@ export const StreamPlayer = ({
             hostIdentity={user.id}
             viewerIdentity={identity}
             name={stream.name}
-            thumbnailUrl={stream.thumbnailUrl }
+            thumbnailUrl={stream.thumbnailUrl}
+          />
+          <AboutCard
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            bio={
+              user.bio ||
+              'This user prefers to keep an air of mystery about them.'
+            }
+            followedByCount={user._count.followedBy}
           />
         </div>
+
         <div className={cn('col-span-1', collapsed && 'hidden')}>
           <Chat
             viewerName={name}

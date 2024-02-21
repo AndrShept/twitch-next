@@ -5,7 +5,8 @@ import { prisma } from '../db/prisma';
 export const getUserByUsername = async (username: string) => {
   const user = await prisma.user.findFirst({
     where: { username },
-    include: { stream: true },
+    include: { stream: true, _count: {select: {followedBy: true}} },
+
   });
   if (!user) {
     throw new Error('User not found');

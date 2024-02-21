@@ -18,6 +18,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { ActionTooltip } from '../ActionTooltip';
+import { EditButton } from '../EditButton';
 
 interface InfoModalProps {
   initialName: string;
@@ -42,10 +43,8 @@ export const InfoModal = ({
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button size="sm" className="ml-auto rounded-full">
-          edit
-        </Button>
+      <DialogTrigger>
+        <EditButton />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
