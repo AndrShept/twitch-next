@@ -2,12 +2,13 @@
 
 import { Thumbnail, ThumbnailSkeleton } from '@/components/Thumbnail';
 import { UserAvatar, UserAvatarSkeleton } from '@/components/UserAvatar';
-
 import { Skeleton } from '@/components/ui/skeleton';
 import { useViewerToken } from '@/hooks/useViewerToken';
 import { LiveKitRoom } from '@livekit/components-react';
 import { Stream, User } from '@prisma/client';
 import Link from 'next/link';
+
+import { StreamListSkeleton } from './StreamList';
 
 interface StreamCardProps {
   stream: Stream & { user: User };
@@ -15,13 +16,17 @@ interface StreamCardProps {
 
 export const StreamCard = ({ stream }: StreamCardProps) => {
   const { token } = useViewerToken(stream.user.id);
+  if (!token) {
+    return <StreamListSkeleton />;
+  }
+
   return (
     <Link href={`/${stream.user.username}`}>
       <LiveKitRoom
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
       >
-        <div className="h-full w-full space-y-4 border hover:border-primary  rounded-md min-w-[340px] max-w-[400px] transition">
+        <div className="h-full w-full  border hover:border-primary  rounded-md min-w-[340px] max-w-[400px] transition">
           <Thumbnail
             thumbnailUrl={stream.thumbnailUrl}
             userImageUrl={stream.user.imageUrl}
@@ -52,17 +57,19 @@ export const StreamCard = ({ stream }: StreamCardProps) => {
   );
 };
 
-export const ResultCardSkeleton = () => {
+export const StreamCardSkeleton = () => {
   return (
-    <div className="h-full w-full space-y-4">
+    <div className="rounded-md min-w-[340px] max-w-[400px] space-x-4  ">
+
       <ThumbnailSkeleton />
-      <div className="flex gap-x-3">
+      <div className="flex gap-x-3 mt-6">
         <UserAvatarSkeleton />
-        <div className="flex flex-col gap-y-1">
+        <div className="flex flex-col gap-y-1 ">
           <Skeleton className="h-4 w-32" />
           <Skeleton className="h-3 w-24" />
         </div>
       </div>
     </div>
+    // <Skeleton  className='rounded-md w-[340px] h-[100px]'/>
   );
 };

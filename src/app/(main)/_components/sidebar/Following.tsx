@@ -40,6 +40,7 @@ export const Following = ({ data }: FollowingProps) => {
             username={follow.followingUser!.username}
             imageUrl={follow.followingUser!.imageUrl}
             isLive={follow.followingUser!.stream?.isLive}
+            userId={follow.followingUser!.id}
           />
         ))}
       </ul>

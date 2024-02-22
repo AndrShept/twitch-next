@@ -4,7 +4,6 @@ import { useHoverCard } from '@/store/use-hoverCard';
 import { useSidebar } from '@/store/use-sidebar';
 import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
-import { useHover } from 'usehooks-ts';
 
 import { LiveBadge } from './LiveBadge';
 import { Skeleton } from './ui/skeleton';
