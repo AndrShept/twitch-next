@@ -5,8 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { ChatInfo } from './ChatInfo ';
 
+import { EmojiPicker } from '../EmojiPicker';
+import { ChatInfo } from './ChatInfo ';
 
 interface ChatFormProps {
   onSubmit: () => void;
@@ -16,9 +17,11 @@ interface ChatFormProps {
   isFollowersOnly: boolean;
   isFollowing: boolean;
   isDelayed: boolean;
+  isPending: boolean;
 }
 
 export const ChatForm = ({
+  isPending,
   onSubmit,
   value,
   onChange,
@@ -72,8 +75,19 @@ export const ChatForm = ({
           )}
         />
       </div>
-      <div className="ml-auto">
-        <Button type="submit"  size="sm" disabled={isDisabled}>
+      <div className="ml-auto items-center flex gap-2">
+        <Button
+          type="button"
+          disabled={isPending}
+          className="rounded-full   h-[24px] w-[24px] p-1"
+          size={'icon'}
+         
+        >
+          <EmojiPicker
+            onChange={(emoji: string) => onChange(`${value} ${emoji}`)}
+          />
+        </Button>
+        <Button type="submit" size="sm" disabled={isDisabled}>
           Chat
         </Button>
       </div>
