@@ -2,10 +2,11 @@ import { getUserByUsername } from '@/lib/services/user-service';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { BlockButton } from './_components/BlockButton';
-import { FollowButton } from './_components/FollowButton';
 import { isBlockingUser } from '../../actions/block';
 import { isFollowingUser } from '../../actions/follow';
+import { BlockButton } from '../../../components/BlockButton';
+import { FollowButton } from '../../../components/FollowButton';
+import { StreamPlayer } from '@/components/stream-player/StreamPlayer';
 
 interface UserPageProps {
   params: { username: string };
@@ -20,11 +21,16 @@ const UserPage = async ({ params }: UserPageProps) => {
 
   const isUserFollowExist = await isFollowingUser(user.id);
   const isUserBlockExist = await isBlockingUser(user.id);
+
+  if (isUserBlockExist) {
+    notFound();
+  }
   return (
-    <div className="space-x-2">
-      {user?.username}
-      <FollowButton userId={user.id} isUserFollowExist={isUserFollowExist} />
-      <BlockButton userId={user.id} isUserBlockExist={isUserBlockExist} />
+    <div className="">
+       {/* {user.username} */}
+      {/* <FollowButton userId={user.id} isUserFollowExist={isUserFollowExist} />
+      <BlockButton userId={user.id} isUserBlockExist={isUserBlockExist} /> */} 
+      <StreamPlayer isFollowing={isUserFollowExist } stream={user.stream} user={user}/>
     </div>
   );
 };

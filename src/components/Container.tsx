@@ -16,7 +16,7 @@ export const Container = ({ children }: { children: ReactNode }) => {
   if (!isMount) {
     return (
       <section
-        className={cn('flex-1 lg:p-6 p-2 ml-[70px] lg:ml-60  flex flex-col  ', {
+        className={cn('flex-1  ml-[70px] lg:ml-60   flex flex-col  ', {
           // 'ml-[70px]': collapsed,
           // 'ml-60': !collapsed,
         })}
@@ -27,7 +27,7 @@ export const Container = ({ children }: { children: ReactNode }) => {
   }
   return (
     <section
-      className={cn('flex-1 lg:p-6 p-2  flex flex-col  ', {
+      className={cn('flex-1    flex flex-col  ', {
         'ml-[70px]': collapsed,
         'ml-60': !collapsed,
       })}

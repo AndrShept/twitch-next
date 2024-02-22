@@ -23,12 +23,11 @@ export const isFollowingUser = async (userId: string) => {
     });
     if (existingFollow) {
       return true;
-    } else {
-      false;
-    }
+    } 
   } catch (error) {
     return false;
   }
+  return false
 };
 export const followUser = async (id: string) => {
   const self = await getSelfUser();

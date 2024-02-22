@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Heart } from 'lucide-react';
 import React from 'react';
 
-import { useFollow } from '../../../../hooks/useFollow';
+import { useFollow } from '../hooks/useFollow';
 
 interface FollowButtonProps {
   userId: string;
@@ -21,7 +21,7 @@ export const FollowButton = ({
   const { isPending, onFollow } = useFollow(userId);
   return (
     <>
-      <Button className={cn(className)} disabled={isPending} onClick={onFollow}>
+      <Button size={'sm'} className={cn('',className)} disabled={isPending} onClick={onFollow}>
         <Heart
           className={cn('mr-1 size-5' , {
             'fill-red-500 stroke-red-500': isUserFollowExist,

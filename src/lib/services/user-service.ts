@@ -8,7 +8,7 @@ export const getUserByUsername = async (username: string) => {
     include: { stream: true, _count: {select: {followedBy: true}} },
 
   });
-  if (!user) {
+  if (!user ) {
     throw new Error('User not found');
   }
   return user;

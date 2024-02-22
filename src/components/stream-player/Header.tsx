@@ -1,13 +1,11 @@
 'use client';
 
-import { FollowButton } from '@/app/(main)/[username]/_components/FollowButton';
-import { useAuth } from '@clerk/nextjs';
+import { FollowButton } from '@/components/FollowButton';
 import {
   useParticipants,
   useRemoteParticipant,
 } from '@livekit/components-react';
 import { UserIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { UserAvatar, UserAvatarSkeleton } from '../UserAvatar';
@@ -31,8 +29,6 @@ export const Header = ({
   name,
   viewerIdentity,
 }: HeaderProps) => {
-
-
   const participants = useParticipants();
   const participant = useRemoteParticipant(hostIdentity);
   const isLive = !!participant;
@@ -40,9 +36,8 @@ export const Header = ({
   const hostAsViewer = `host-${hostIdentity}`;
   const isHost = viewerIdentity === hostAsViewer;
 
-
   return (
-    <header className="flex flex-col lg:flex-row lg:items-center gap-y-2 justify-between   bg-secondary/60 lg:p-4 p-2">
+    <header className="flex  items-center gap-y-2 justify-between    lg:p-6 p-4">
       <section className="flex items-center gap-x-3">
         <UserAvatar
           imageUrl={imageUrl}
@@ -75,27 +70,29 @@ export const Header = ({
           )}
         </div>
       </section>
-    {!isHost &&  <FollowButton
-        className="lg:w-fit w-full"
-        userId={hostIdentity}
-        isUserFollowExist={isFollowing}
-      />}
+      {!isHost && (
+        <FollowButton
+          className="w-fit"
+          userId={hostIdentity}
+          isUserFollowExist={isFollowing}
+        />
+      )}
       {/* <BlockButton userId={user.id} isUserBlockExist={isUserBlockExist} /> */}
     </header>
   );
 };
 
 export const HeaderSkeleton = () => {
-    return (
-      <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4">
-        <div className="flex items-center gap-x-2">
-          <UserAvatarSkeleton size="lg" />
-          <div className="space-y-2">
-            <Skeleton className="h-6 w-32" />
-            <Skeleton className="h-4 w-24" />
-          </div>
+  return (
+    <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4">
+      <div className="flex items-center gap-x-2">
+        <UserAvatarSkeleton size="lg" />
+        <div className="space-y-2">
+          <Skeleton className="h-6 w-32" />
+          <Skeleton className="h-4 w-24" />
         </div>
-        {/* <ActionsSkeleton /> */}
       </div>
-    );
-  };
+      {/* <ActionsSkeleton /> */}
+    </div>
+  );
+};

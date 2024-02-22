@@ -9,7 +9,7 @@ export const OfflineVideo = ({
 }: OfflineVideoProps) => {
   return (
     <div className="h-full flex flex-col space-y-4 justify-center items-center">
-      <WifiOff className="h-10 w-10 text-muted-foreground" />
+      <WifiOff className="h-10 w-10 text-muted-foreground animate-pulse" />
       <p className="text-muted-foreground">
         {username} is offline
       </p>

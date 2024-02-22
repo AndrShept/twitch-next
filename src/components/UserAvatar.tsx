@@ -36,14 +36,15 @@ export const UserAvatar = ({
   showBadge,
   size,
 }: UserAvatarProps) => {
+
   const collapsed = useSidebar((state) => state.collapsed);
-  const canShowBadge = showBadge && isLive;
+  const canShowBadge = showBadge && isLive && collapsed;
   const { setHoverCar } = useHoverCard();
 
   return (
     <div
       onMouseEnter={() => setHoverCar({ username, imageUrl })}
-      className="relative"
+      className="relative border-2 rounded-full "
     >
       <Avatar
         className={cn(
@@ -57,6 +58,7 @@ export const UserAvatar = ({
       {canShowBadge && (
         <div className="absolute -bottom-3 left-1/2 -translate-x-1/2">
           <LiveBadge />
+       
         </div>
       )}
     </div>

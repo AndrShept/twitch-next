@@ -8,8 +8,7 @@ import React from 'react';
 import { UserItem } from './UserItem';
 
 interface RecommendedProps {
-  data: (User & { stream: Stream | null })[]
- 
+  data: (User & { stream: Stream | null })[];
 }
 
 export const Recommended = ({ data: users }: RecommendedProps) => {
@@ -26,15 +25,18 @@ export const Recommended = ({ data: users }: RecommendedProps) => {
           <p className="text-sm text-muted-foreground">Recommended</p>
         </div>
       )}
-      <ul className="p-2 ">
-        {users?.map((user) => (
-          <UserItem
-            key={user.id}
-            username={user.username}
-            imageUrl={user.imageUrl}
-            isLive={user.stream?.isLive}
-          />
-        ))}
+      <ul className="p-2 flex flex-col gap-y-1 ">
+
+          {users?.map((user) => (
+            <UserItem
+              key={user.id}
+              userId={user.id}
+              username={user.username}
+              imageUrl={user.imageUrl}
+              isLive={user.stream?.isLive}
+            />
+          ))}
+       
       </ul>
     </div>
   );

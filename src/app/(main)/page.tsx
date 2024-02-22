@@ -1,10 +1,9 @@
-import { createUser } from '@/lib/services/user-service';
-import { currentUser } from '@clerk/nextjs';
+import { StreamList } from './_components/StreamList';
 
 export default async function Home() {
-  // const profile = await currentUser();
-  // if (profile) {
-  //  await createUser();
-  // }
-  return <>Home</>;
+  return (
+    <div className="h-full md:p-6 p-4 mx-auto  ">
+      <StreamList />
+    </div>
+  );
 }
