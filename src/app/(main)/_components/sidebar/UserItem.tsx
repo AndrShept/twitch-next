@@ -1,38 +1,29 @@
 'use client';
 
 import { HoverCardAction } from '@/components/HoverCardAction';
-import { LiveBadge } from '@/components/LiveBadge';
 import { ParticipantCount } from '@/components/ParticipantCount';
 import { UserAvatar } from '@/components/UserAvatar';
 import { Button } from '@/components/ui/button';
 import { useViewerToken } from '@/hooks/useViewerToken';
 import { cn } from '@/lib/utils';
 import { useSidebar } from '@/store/use-sidebar';
-import { LiveKitRoom, useParticipants } from '@livekit/components-react';
-import { UsersIcon } from 'lucide-react';
+import { LiveKitRoom } from '@livekit/components-react';
+import { Stream, User } from '@prisma/client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
 interface UserItemProps {
-  userId: string;
-  username: string;
-  imageUrl: string;
-  isLive?: boolean;
+  user:  User & { stream: Stream | null  } ;
 }
 
-export const UserItem = ({
-  imageUrl,
-  username,
-  isLive,
-  userId,
-}: UserItemProps) => {
+export const UserItem = ({ user }: UserItemProps) => {
   const pathname = usePathname();
   const collapsed = useSidebar((state) => state.collapsed);
-  const href = `/${username}`;
+  const href = `/${user.username}`;
   const isActive = href === pathname;
 
-  const { token } = useViewerToken(userId);
+  const { token } = useViewerToken(user.id);
   return (
     <LiveKitRoom
       token={token}
@@ -53,21 +44,23 @@ export const UserItem = ({
               collapsed && 'justify-center',
             )}
           >
-            <div className='flex items-center gap-2'>
+            <div className="flex items-center gap-2">
               <HoverCardAction>
                 <UserAvatar
-                  imageUrl={imageUrl}
-                  username={username}
-                  isLive={isLive}
+                  imageUrl={user.imageUrl}
+                  username={user.username}
+                  isLive={user.stream?.isLive}
+                  bio={user.bio!}
+                  thumbnailUrl={user.stream?.thumbnailUrl || ''}
                   showBadge
                 />
               </HoverCardAction>
               {!collapsed && (
-                <p className="break-all line-clamp-1">{username}</p>
+                <p className="break-all line-clamp-1">{user.username}</p>
               )}
             </div>
 
-            {!collapsed && isLive && (
+            {!collapsed && user.stream?.isLive && (
               <div>
                 <div className="flex items-center justify-between ">
                   <div className="p-1 rounded-full bg-rose-600 mr-2" />

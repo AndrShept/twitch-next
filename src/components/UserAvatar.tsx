@@ -25,7 +25,9 @@ interface UserAvatarProps extends VariantProps<typeof avatarSizes> {
   imageUrl: string;
   username: string;
   isLive?: boolean;
-  showBadge?: boolean;
+  showBadge?: boolean | undefined;
+  bio?: string;
+  thumbnailUrl?: string;
 }
 
 export const UserAvatar = ({
@@ -34,16 +36,19 @@ export const UserAvatar = ({
   username,
   showBadge,
   size,
+  bio,
+  thumbnailUrl,
 }: UserAvatarProps) => {
-
   const collapsed = useSidebar((state) => state.collapsed);
   const canShowBadge = showBadge && isLive && collapsed;
-  const { setHoverCar } = useHoverCard();
+  const { setHoverCar } = useHoverCard((state) => state);
 
   return (
     <div
-      onMouseEnter={() => setHoverCar({ username, imageUrl })}
-      className="relative border-2 rounded-full "
+      onMouseEnter={() =>
+        setHoverCar({ username, imageUrl, bio, thumbnailUrl })
+      }
+      className="relative  "
     >
       <Avatar
         className={cn(
@@ -51,13 +56,12 @@ export const UserAvatar = ({
           avatarSizes({ size }),
         )}
       >
-        <AvatarImage src={''} className="object-cover" />
-        <AvatarFallback className="font-light uppercase">{`${username[0]}${username.at(-1)}`}</AvatarFallback>
+        <AvatarImage src={imageUrl} className="object-cover" />
+        <AvatarFallback className="font-light uppercase border-2 rounded-full">{`${username[0]}${username.at(-1)}`}</AvatarFallback>
       </Avatar>
       {canShowBadge && (
         <div className="absolute -bottom-3 left-1/2 -translate-x-1/2">
           <LiveBadge />
-       
         </div>
       )}
     </div>

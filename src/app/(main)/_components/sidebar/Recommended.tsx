@@ -30,10 +30,7 @@ export const Recommended = ({ data: users }: RecommendedProps) => {
           {users?.map((user) => (
             <UserItem
               key={user.id}
-              userId={user.id}
-              username={user.username}
-              imageUrl={user.imageUrl}
-              isLive={user.stream?.isLive}
+              user={user}
             />
           ))}
        

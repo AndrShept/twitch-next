@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SearchIcon, X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import qs from 'query-string';
 import React, { ElementRef, useRef, useState } from 'react';
 
@@ -28,6 +28,7 @@ export const Search = () => {
   const onClear = () => {
     setValue('');
     ref.current?.focus();
+    router.push('/');
   };
 
   return (
@@ -44,12 +45,13 @@ export const Search = () => {
       />
       {value && (
         <Button
+          type="reset"
           onClick={onClear}
-          className="absolute right-12 size-6 p-[2px] text-muted-foreground"
+          className="absolute right-12 size-6 p-[2px] text-muted-foreground rounded-full"
           variant={'ghost'}
           size={'icon'}
         >
-          <X className="   " />
+          <X  />
         </Button>
       )}
       <Button

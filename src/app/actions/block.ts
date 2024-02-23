@@ -23,9 +23,8 @@ export const isBlockingUser = async (userId: string) => {
     });
     if (existingBlock) {
       return true;
-    } else {
-      false;
-    }
+    } 
+    return false
   } catch (error) {
     return false;
   }
