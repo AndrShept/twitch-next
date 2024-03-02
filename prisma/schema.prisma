@@ -55,6 +55,7 @@ model Stream {
   updatedAt DateTime @updatedAt
 
   @@fulltext([name])
+   @@map("streams")
 }
 
 model Follow {
