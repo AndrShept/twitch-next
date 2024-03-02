@@ -18,7 +18,7 @@ export const useGenerateIngress = () => {
           toast.success('Ingress created');
           ref.current?.click();
         })
-        .catch(() => toast.error('Something went wrong'));
+        .catch((err) => toast.error(`Something went wrong ${err}`));
     });
   };
   return {
