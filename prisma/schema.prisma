@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider     = "mysql"
+  provider     = "mongodb"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -13,12 +13,12 @@ generator client {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String @id @default(uuid()) @map("_id")
   username String @unique
-  imageUrl String @db.Text
+  imageUrl String
 
   externalUserId String  @unique
-  bio            String? @db.Text
+  bio            String?
 
   following  Follow[] @relation(name: "following")
   followedBy Follow[] @relation(name: "followedBy")
@@ -35,13 +35,13 @@ model User {
 }
 
 model Stream {
-  id           String  @id @default(uuid())
-  name         String  @db.Text
-  thumbnailUrl String? @db.Text
+  id           String  @id @default(uuid()) @map("_id")
+  name         String
+  thumbnailUrl String?
 
   ingressId String? @unique
-  serverUrl String? @db.Text
-  streamKey String? @db.Text
+  serverUrl String?
+  streamKey String?
 
   isLive              Boolean @default(false)
   isChatEnabled       Boolean @default(true)
@@ -54,13 +54,11 @@ model Stream {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId])
-  @@index([ingressId])
   @@fulltext([name])
 }
 
 model Follow {
-  id           String  @id @default(uuid())
+  id           String  @id @default(uuid()) @map("_id")
   followingId  String?
   followedById String?
 
@@ -76,7 +74,7 @@ model Follow {
 }
 
 model Block {
-  id               String  @id @default(uuid())
+  id               String  @id @default(uuid()) @map("_id")
   blockUserId      String?
   blockingUserById String?
 
