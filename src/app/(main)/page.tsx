@@ -9,11 +9,11 @@ import { StreamList, StreamListSkeleton } from './_components/StreamList';
 
 export default async function Home() {
   const self = await currentUser();
-  if (!self) {
-    redirect('/sign-up');
-  }
+  // if (!self) {
+  //   redirect('/sign-up');
+  // }
   const user = await prisma.user.findFirst({
-    where: { externalUserId: self.id },
+    where: { externalUserId: self?.id },
   });
   if (!user) {
     const res = await createUser();

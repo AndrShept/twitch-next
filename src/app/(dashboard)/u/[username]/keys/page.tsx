@@ -24,8 +24,8 @@ const KeysPage = async () => {
         <ConnectModal />
       </div>
       <div className="space-y-4">
-        <UrlCard value={stream.serverUrl || 'default URL'} />
-        <KeyCard value={stream.streamKey || 'default KEY'} />
+        <UrlCard value={stream.serverUrl || 'need generate...'} />
+        <KeyCard value={stream.streamKey || 'need generate...'} />
       </div>
 
 

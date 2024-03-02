@@ -54,6 +54,8 @@ export async function POST(req: Request) {
   // Get the ID and type
   const { id } = evt.data;
   const eventType = evt.type;
+  console.log(eventType)
+  console.log(payload.data.id)
 
   if (eventType === 'user.created') {
     await prisma.user.create({
@@ -70,6 +72,7 @@ export async function POST(req: Request) {
     const currentUser = await prisma.user.findUnique({
       where: { externalUserId: payload.data.id },
     });
+    console.log(currentUser)
 
     if (!currentUser) {
       return NextResponse.json('User not found', { status: 404 });
