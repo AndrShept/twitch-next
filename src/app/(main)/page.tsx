@@ -8,18 +8,18 @@ import { Suspense } from 'react';
 import { StreamList, StreamListSkeleton } from './_components/StreamList';
 
 export default async function Home() {
-  const self = await currentUser();
-  // if (!self) {
-  //   redirect('/sign-up');
+  // const self = await currentUser();
+  // // if (!self) {
+  // //   redirect('/sign-up');
+  // // }
+  // const user = await prisma.user.findFirst({
+  //   where: { externalUserId: self?.id },
+  // });
+  // if (!user) {
+  //   const res = await createUser();
+  //   console.log(res);
+  //   console.log('GO!!!');
   // }
-  const user = await prisma.user.findFirst({
-    where: { externalUserId: self?.id },
-  });
-  if (!user) {
-    const res = await createUser();
-    console.log(res);
-    console.log('GO!!!');
-  }
 
 
 
