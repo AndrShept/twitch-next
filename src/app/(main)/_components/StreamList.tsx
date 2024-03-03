@@ -1,6 +1,6 @@
-import { Skeleton } from '@/components/ui/skeleton';
+
 import { getStream } from '@/lib/services/feed-secrvice';
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import { StreamCard, StreamCardSkeleton } from './StreamCard';
 
@@ -18,7 +18,7 @@ export const StreamList = async () => {
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         {streams.map((stream) => (
           <StreamCard key={stream.id} stream={stream} />
-        ))}{' '}
+        ))}
       </ul>
     </div>
   );

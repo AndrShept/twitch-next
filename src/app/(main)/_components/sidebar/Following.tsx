@@ -13,6 +13,12 @@ interface FollowingProps {
       | (User & {
           stream: Stream | null;
         });
+  } & {
+    followedByUser:
+      | null
+      | (User & {
+          stream: Stream | null;
+        });
   })[];
 }
 
@@ -33,9 +39,9 @@ export const Following = ({ data }: FollowingProps) => {
           <p className="text-sm text-muted-foreground">Following</p>
         </div>
       )}
-      <ul className="space-y-2 px-2">
+      <ul className="space-y-2 p-2 lg:mb-4 mb-0">
         {data.map((follow) => (
-          <UserItem key={follow.id} user={follow.followingUser!} />
+          <UserItem key={follow.id} user={follow.followedByUser!} />
         ))}
       </ul>
     </div>

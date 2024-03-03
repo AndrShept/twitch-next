@@ -27,7 +27,7 @@ export const StreamCard = ({ stream }: StreamCardProps) => {
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
       >
-        <div className="h-full w-full  border group hover:border-primary  rounded-md min-w-[320px] max-w-[400px] transition">
+        <div className="h-full w-full  border group hover:border-primary  rounded-md min-w-[280px] max-w-[400px] transition">
           <Thumbnail
             thumbnailUrl={stream.thumbnailUrl}
             userImageUrl={stream.user.imageUrl}
@@ -66,7 +66,7 @@ export const StreamCard = ({ stream }: StreamCardProps) => {
 
 export const StreamCardSkeleton = () => {
   return (
-    <div className="rounded-md min-w-[320px] max-w-[400px] space-x-4  ">
+    <div className="rounded-md min-w-[280px] max-w-[400px] space-x-4  ">
       <ThumbnailSkeleton />
       <div className="flex gap-x-3 mt-6">
         <UserAvatarSkeleton />
