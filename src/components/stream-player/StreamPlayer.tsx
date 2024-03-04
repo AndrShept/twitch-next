@@ -78,7 +78,7 @@ export const StreamPlayer = ({
           />
         </div>
 
-        <div className={cn('col-span-1 ', collapsed && 'hidden')}>
+        <div className={cn('col-span-1 h-full ', collapsed && 'hidden')}>
           <Chat
             streamId={stream.id}
             viewerName={name}

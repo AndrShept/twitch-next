@@ -3,9 +3,11 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetChat } from '@/hooks/useGetChat';
 import { ReceivedChatMessage } from '@livekit/components-react';
-import { forwardRef, useEffect, useRef } from 'react';
+import { ChevronDownIcon } from 'lucide-react';
+import { forwardRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Button } from '../ui/button';
 import { ScrollArea } from '../ui/scroll-area';
 import { ChatMessage } from './ChatMessage ';
 
@@ -34,9 +36,14 @@ export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(
       }),
     ];
 
+    const scrollToBottom = () => {
+      //@ts-ignore
+      ref?.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
     if (isHidden || !collapseMessages.length) {
       return (
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center bg-secondary/50">
           <p className="text-sm text-muted-foreground">
             {isHidden ? 'Chat is disabled' : 'Welcome to the chat!'}
           </p>
@@ -45,14 +52,19 @@ export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(
     }
 
     return (
-      <div
-        ref={ref}
-        className="flex flex-1 flex-col-reverse overflow-y-auto   h-full"
-      >
+      <div className="flex flex-1 flex-col-reverse overflow-y-auto  bg-secondary/50  h-full ">
+        <Button
+          className="rounded-none text-muted-foreground"
+          variant={'ghost'}
+          onClick={scrollToBottom}
+        >
+          <ChevronDownIcon />
+        </Button>
         <ScrollArea>
           {collapseMessages.map((message) => (
             <ChatMessage key={message.id} data={message} />
           ))}
+          <div ref={ref} />
         </ScrollArea>
       </div>
     );

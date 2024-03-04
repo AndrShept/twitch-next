@@ -1,16 +1,14 @@
 'use client';
 
 import { addMessage } from '@/app/actions/chat';
-import { useGetChat } from '@/hooks/useGetChat';
 import { ChatVariant, useChatSidebar } from '@/store/use-chat-sidebar';
-import { useChatStore } from '@/store/useChatStore';
 import {
   useChat,
   useConnectionState,
   useRemoteParticipant,
 } from '@livekit/components-react';
 import { ConnectionState } from 'livekit-client';
-import { Ref, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { ChatCommunity } from './ChatCommunity ';
@@ -52,7 +50,7 @@ export const Chat = ({
   const [value, setValue] = useState('');
   const { chatMessages: messages, send, isSending } = useChat();
 
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (matches) {
@@ -75,13 +73,9 @@ export const Chat = ({
     });
 
     setValue('');
-    const scrollContainer = ref.current;
-    if (scrollContainer) {
-      // Опустити скрол вниз
-      console.log(scrollContainer.scrollWidth);
-      console.log(scrollContainer.scrollHeight);
-
-    }
+    setTimeout(() => {
+      ref.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 230);
   };
 
   const onChange = (value: string) => {
@@ -89,7 +83,7 @@ export const Chat = ({
   };
 
   return (
-    <div className="flex flex-col bg-background border-l border-b  h-[calc(100vh-80px)]">
+    <div className="flex flex-col bg-background border-l border-b rounded-b-xl  h-[calc(100vh-80px)]">
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>
