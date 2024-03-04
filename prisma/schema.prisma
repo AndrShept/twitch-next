@@ -30,6 +30,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Chat      Chat[]
 
   @@map("users")
 }
@@ -48,6 +49,8 @@ model Stream {
   isChatDelayed       Boolean @default(false)
   isChatFollowersOnly Boolean @default(false)
 
+  chat Chat[]
+
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -56,6 +59,25 @@ model Stream {
 
   @@fulltext([name])
   @@map("streams")
+}
+
+model Chat {
+  id       String  @id @default(uuid()) @map("_id")
+  content  String
+  username String?
+
+  userId   String?
+  streamId String?
+
+  user   User ?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Stream Stream? @relation(fields: [streamId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([streamId])
+  @@map("chats")
 }
 
 model Follow {

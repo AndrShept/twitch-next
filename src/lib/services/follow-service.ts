@@ -8,7 +8,6 @@ export const getFollowedUsers = async () => {
     const followedUsers = prisma.follow.findMany({
       where: {
         followingId: self.id,
-
       },
       include: {
         followingUser: {

@@ -17,7 +17,7 @@ import { Video, VideoSkeleton } from './Video';
 interface StreamPlayerProps {
   user: User & { stream: Stream | null; _count: { followedBy: number } };
   stream: Stream | null;
-  isFollowing: boolean  ;
+  isFollowing: boolean;
 }
 
 export const StreamPlayer = ({
@@ -31,8 +31,8 @@ export const StreamPlayer = ({
   if (!token || !name || !identity) {
     return <StreamPlayerSkeleton />;
   }
-  if(!stream){
-    throw new Error('Stream not found')
+  if (!stream) {
+    throw new Error('Stream not found');
   }
 
   return (
@@ -80,7 +80,9 @@ export const StreamPlayer = ({
 
         <div className={cn('col-span-1 ', collapsed && 'hidden')}>
           <Chat
+            streamId={stream.id}
             viewerName={name}
+            viewerIdentity={identity}
             hostName={user.username}
             hostIdentity={user.id}
             isFollowing={isFollowing}

@@ -5,6 +5,7 @@ import { useSidebar } from '@/store/use-sidebar';
 import { Follow, Stream, User } from '@prisma/client';
 
 import { UserItem } from './UserItem';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface FollowingProps {
   data: (Follow & {
@@ -33,18 +34,19 @@ export const Following = ({ data }: FollowingProps) => {
   }
 
   return (
-    <div>
+    < >
       {!collapsed && (
         <div className="pl-6 mb-4">
           <p className="text-sm text-muted-foreground">Following</p>
         </div>
       )}
-      <ul className="space-y-2 p-2 lg:mb-4 mb-0">
+      
+      <ul className="space-y-2  lg:mb-4 mb-0 p-2">
         {data.map((follow) => (
           <UserItem key={follow.id} user={follow.followedByUser!} />
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 

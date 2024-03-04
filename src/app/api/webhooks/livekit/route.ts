@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   }
 
   const event = receiver.receive(body, authorization);
-  console.log(event.ingressInfo?.ingressId);
+
   if (event.event === 'ingress_started') {
     await prisma.stream.update({
       where: {
@@ -25,18 +25,23 @@ export async function POST(req: Request) {
       },
       data: {
         isLive: true,
+        isChatFollowersOnly: true
       },
     });
+
   }
 
   if (event.event === 'ingress_ended') {
-    await prisma.stream.update({
+     await prisma.stream.update({
       where: {
         ingressId: event.ingressInfo?.ingressId,
       },
       data: {
         isLive: false,
+        
       },
     });
+    
+
   }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { UserAvatarSkeleton } from '@/components/UserAvatar';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { useSidebar } from '@/store/use-sidebar';
@@ -19,9 +20,9 @@ export const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
     <aside
       className={cn(
-        'fixed flex flex-col inset-y-0 z-50 w-60 top-20 bg-secondary/60 border-r  ',
+        'fixed flex flex-col inset-y-0 z-50 w-60    top-20 bg-secondary/60 border-r  ',
         {
-          'w-[70px] transition-all': collapsed,
+          'w-[70px] transition-all ': collapsed,
           '  transition-all ': !collapsed,
         },
       )}

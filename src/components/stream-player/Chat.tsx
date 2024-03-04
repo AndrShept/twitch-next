@@ -1,13 +1,16 @@
 'use client';
 
+import { addMessage } from '@/app/actions/chat';
+import { useGetChat } from '@/hooks/useGetChat';
 import { ChatVariant, useChatSidebar } from '@/store/use-chat-sidebar';
+import { useChatStore } from '@/store/useChatStore';
 import {
   useChat,
   useConnectionState,
   useRemoteParticipant,
 } from '@livekit/components-react';
 import { ConnectionState } from 'livekit-client';
-import { useEffect, useMemo, useState } from 'react';
+import { Ref, useEffect, useMemo, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { ChatCommunity } from './ChatCommunity ';
@@ -16,6 +19,7 @@ import { ChatHeader, ChatHeaderSkeleton } from './ChatHeader ';
 import { ChatList, ChatListSkeleton } from './ChatList ';
 
 interface ChatProps {
+  streamId: string;
   hostName: string;
   hostIdentity: string;
   viewerName: string;
@@ -23,9 +27,11 @@ interface ChatProps {
   isChatEnabled: boolean;
   isChatDelayed: boolean;
   isChatFollowersOnly: boolean;
+  viewerIdentity: string;
 }
 
 export const Chat = ({
+  viewerIdentity,
   hostName,
   hostIdentity,
   viewerName,
@@ -33,25 +39,26 @@ export const Chat = ({
   isChatEnabled,
   isChatDelayed,
   isChatFollowersOnly,
+  streamId,
 }: ChatProps) => {
   const matches = useMediaQuery('(max-width: 1024px)');
   const { variant, onExpand } = useChatSidebar((state) => state);
   const connectionState = useConnectionState();
   const participant = useRemoteParticipant(hostIdentity);
-
   const isOnline = participant && connectionState === ConnectionState.Connected;
 
   const isHidden = !isChatEnabled || !isOnline;
 
   const [value, setValue] = useState('');
-  const { chatMessages: messages, send,isSending } = useChat();
+  const { chatMessages: messages, send, isSending } = useChat();
+
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (matches) {
       onExpand();
     }
   }, [matches, onExpand]);
-
   const reversedMessages = useMemo(() => {
     return messages.sort((a, b) => a.timestamp - b.timestamp);
   }, [messages]);
@@ -60,7 +67,21 @@ export const Chat = ({
     if (!send) return;
 
     send(value);
+    addMessage({
+      content: value,
+      userId: viewerIdentity,
+      streamId,
+      username: viewerName,
+    });
+
     setValue('');
+    const scrollContainer = ref.current;
+    if (scrollContainer) {
+      // Опустити скрол вниз
+      console.log(scrollContainer.scrollWidth);
+      console.log(scrollContainer.scrollHeight);
+
+    }
   };
 
   const onChange = (value: string) => {
@@ -72,9 +93,14 @@ export const Chat = ({
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>
-          <ChatList messages={reversedMessages} isHidden={isHidden} />
+          <ChatList
+            ref={ref}
+            streamId={streamId}
+            messages={reversedMessages}
+            isHidden={isHidden}
+          />
           <ChatForm
-          isPending={isSending}
+            isPending={isSending}
             onSubmit={onSubmit}
             value={value}
             onChange={onChange}

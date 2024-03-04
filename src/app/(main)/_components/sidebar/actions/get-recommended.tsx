@@ -9,7 +9,16 @@ export const getRecommended = async () => {
 
   if (!self) {
     const users = await prisma.user.findMany({
-      orderBy: { createdAt: 'desc' },
+      orderBy: [
+        {
+          stream: {
+            isLive: 'desc',
+          },
+        },
+        {
+          createdAt: 'desc',
+        },
+      ],
       include: { stream: true },
     });
 
@@ -17,7 +26,16 @@ export const getRecommended = async () => {
   }
   const users = await prisma.user.findMany({
     where: { NOT: { externalUserId: self.id } },
-    orderBy: { createdAt: 'desc' },
+    orderBy: [
+      {
+        stream: {
+          isLive: 'desc',
+        },
+      },
+      {
+        createdAt: 'desc',
+      },
+    ],
     include: { stream: true },
   });
 

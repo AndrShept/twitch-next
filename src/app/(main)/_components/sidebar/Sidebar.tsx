@@ -1,3 +1,5 @@
+import { ScrollAreaWrapper } from '@/components/ScrollAreaWrapper';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { getFollowedUsers } from '@/lib/services/follow-service';
 import React from 'react';
@@ -15,11 +17,13 @@ export const Sidebar = async () => {
   return (
     <Wrapper>
       <Toggle />
-      <div className="  ">
-        <Following data={following} />
-        <Separator className='lg:mb-4' />
-        <Recommended data={recommended} />
-      </div>
+
+       
+          <Following data={following} />
+          <Separator className="lg:mb-4" />
+          <Recommended data={recommended} />
+     
+     
     </Wrapper>
   );
 };

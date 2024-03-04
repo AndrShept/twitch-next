@@ -1,5 +1,7 @@
 'use client';
 
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
 import { useSidebar } from '@/store/use-sidebar';
 import { Stream, User } from '@prisma/client';
 import { notFound } from 'next/navigation';
@@ -19,22 +21,19 @@ export const Recommended = ({ data: users }: RecommendedProps) => {
   const showLabel = !collapsed && !!users;
 
   return (
-    <div>
+    <>
       {showLabel && (
         <div className="pl-6 mb-4">
           <p className="text-sm text-muted-foreground">Recommended</p>
         </div>
       )}
-      <ul className="p-2 flex flex-col gap-y-1 ">
-
-          {users?.map((user) => (
-            <UserItem
-              key={user.id}
-              user={user}
-            />
-          ))}
-       
-      </ul>
-    </div>
+      <ScrollArea
+        className={cn('gap-y-1 py-2   ', {
+          'p-2': !collapsed,
+        })}
+      >
+        {users?.map((user) => <UserItem key={user.id} user={user} />)}
+      </ScrollArea>
+    </>
   );
 };

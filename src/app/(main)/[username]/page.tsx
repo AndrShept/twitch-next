@@ -1,5 +1,7 @@
 import { StreamPlayer } from '@/components/stream-player/StreamPlayer';
+import { getChat } from '@/lib/services/chat-service';
 import { getUserByUsername } from '@/lib/services/user-service';
+import { useChatStore } from '@/store/useChatStore';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
@@ -19,10 +21,13 @@ const UserPage = async ({ params }: UserPageProps) => {
 
   const isUserFollowExist = await isFollowingUser(user.id);
   const isUserBlockExist = await isBlockingUser(user.id);
+  // const chatData = await getChat(user.stream?.id!);
+
 
   if (isUserBlockExist) {
     notFound();
   }
+
   return (
     <div className="">
       <StreamPlayer
