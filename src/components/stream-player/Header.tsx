@@ -37,7 +37,7 @@ export const Header = ({
   const isHost = viewerIdentity === hostAsViewer;
 
   return (
-    <header className="flex  items-center gap-y-2 justify-between    lg:p-6 p-4">
+    <header className="flex  items-center gap-2 justify-between    lg:p-6 p-4">
       <section className="flex items-center gap-x-3">
         <UserAvatar
           imageUrl={imageUrl}

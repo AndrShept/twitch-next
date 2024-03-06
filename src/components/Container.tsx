@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 import { useSidebar } from '@/store/use-sidebar';
 import React, { ReactNode, useEffect, useState } from 'react';
 
+import { ScrollArea } from './ui/scroll-area';
+
 export const Container = ({ children }: { children: ReactNode }) => {
   const [isMount, setIsMount] = useState(false);
   const collapsed = useSidebar((state) => state.collapsed);
@@ -32,7 +34,7 @@ export const Container = ({ children }: { children: ReactNode }) => {
         'ml-60': !collapsed,
       })}
     >
-      {children}
+    {children}
     </section>
   );
 };

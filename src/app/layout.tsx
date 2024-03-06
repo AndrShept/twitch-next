@@ -24,7 +24,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark" suppressHydrationWarning>
         <ReactQueryProvider>
-          <body className={`${inter.className} `}>
+          <body className={`${inter.className}  `}>
             <Toaster />
             {children}
           </body>

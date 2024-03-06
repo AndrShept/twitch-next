@@ -39,7 +39,7 @@ export const Chat = ({
   isChatFollowersOnly,
   streamId,
 }: ChatProps) => {
-  const matches = useMediaQuery('(max-width: 1024px)');
+  const isMobile = useMediaQuery('(max-width: 1024px)');
   const { variant, onExpand } = useChatSidebar((state) => state);
   const connectionState = useConnectionState();
   const participant = useRemoteParticipant(hostIdentity);
@@ -53,10 +53,10 @@ export const Chat = ({
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (matches) {
+    if (isMobile) {
       onExpand();
     }
-  }, [matches, onExpand]);
+  }, [isMobile, onExpand]);
   const reversedMessages = useMemo(() => {
     return messages.sort((a, b) => a.timestamp - b.timestamp);
   }, [messages]);
@@ -73,9 +73,6 @@ export const Chat = ({
     });
 
     setValue('');
-    setTimeout(() => {
-      ref.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 230);
   };
 
   const onChange = (value: string) => {
@@ -83,7 +80,7 @@ export const Chat = ({
   };
 
   return (
-    <div className="flex flex-col bg-background border-l border-b rounded-b-xl  h-[calc(100vh-80px)]">
+    <div className="flex flex-col bg-background  border-b border-l    h-[calc(100vh-80px)] lg:sticky lg:top-[80px] lg:mt-0 mt-4 lg:p-3 p-4   ">
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>

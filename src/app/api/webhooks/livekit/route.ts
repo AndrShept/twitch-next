@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       },
       data: {
         isLive: true,
-        isChatFollowersOnly: true
+      
       },
     });
 
@@ -38,6 +38,7 @@ export async function POST(req: Request) {
       },
       data: {
         isLive: false,
+        isChatFollowersOnly: true
         
       },
     });

@@ -1,12 +1,13 @@
 'use client';
 
 import { Skeleton } from '@/components/ui/skeleton';
+import { useChatScroll } from '@/hooks/useChatScroll';
 import { useGetChat } from '@/hooks/useGetChat';
 import { ReceivedChatMessage } from '@livekit/components-react';
 import { ChevronDownIcon } from 'lucide-react';
 import { forwardRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
+import { Spinner } from '../Spinner';
 import { Button } from '../ui/button';
 import { ScrollArea } from '../ui/scroll-area';
 import { ChatMessage } from './ChatMessage ';
@@ -19,29 +20,13 @@ interface ChatListProps {
 
 export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(
   ({ messages, isHidden, streamId }, ref) => {
-    const { data: oldMessages, isPending } = useGetChat(streamId);
+    const { mergeMessages, isPending } = useGetChat({ messages, streamId });
+    const { scrollToBottom } = useChatScroll({
+      msgLength: mergeMessages.length,
+      ref,
+    });
 
-    const collapseMessages = [
-      ...oldMessages,
-      ...messages.map((message: ReceivedChatMessage) => {
-        return {
-          id: uuidv4(),
-          content: message.message,
-          userId: message.from?.identity.replace('host-', '') || '',
-          streamId,
-          username: message.from?.name || '',
-          createdAt: new Date(message.timestamp),
-          updatedAt: new Date(message.timestamp),
-        };
-      }),
-    ];
-
-    const scrollToBottom = () => {
-      //@ts-ignore
-      ref?.current.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    if (isHidden || !collapseMessages.length) {
+    if (isHidden || !mergeMessages.length) {
       return (
         <div className="flex flex-1 items-center justify-center bg-secondary/50">
           <p className="text-sm text-muted-foreground">
@@ -52,16 +37,16 @@ export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(
     }
 
     return (
-      <div className="flex flex-1 flex-col-reverse overflow-y-auto  bg-secondary/50  h-full ">
+      <div className="flex flex-1 flex-col-reverse overflow-y-auto  bg-secondary/50 lg:rounded-none rounded-b-xl   ">
         <Button
-          className="rounded-none text-muted-foreground"
+          className="lg:rounded-none rounded-b-xl text-muted-foreground"
           variant={'ghost'}
           onClick={scrollToBottom}
         >
           <ChevronDownIcon />
         </Button>
         <ScrollArea>
-          {collapseMessages.map((message) => (
+          {mergeMessages.map((message) => (
             <ChatMessage key={message.id} data={message} />
           ))}
           <div ref={ref} />

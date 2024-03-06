@@ -7,7 +7,7 @@ import { VariantToggle } from './VariantToggle ';
 
 export const ChatHeader = () => {
   return (
-    <div className="relative p-3 border-b bg-secondary/50">
+    <div className="relative p-3 border-b  rounded-t-xl bg-secondary/50">
       <div className="absolute left-2 top-2 hidden lg:block">
         <ChatToggle />
       </div>
