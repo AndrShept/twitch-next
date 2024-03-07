@@ -44,28 +44,16 @@ export const Chat = ({
   const { variant, onExpand } = useChatSidebar((state) => state);
   const connectionState = useConnectionState();
   const participant = useRemoteParticipant(hostIdentity);
-  const isOnline = participant && connectionState === ConnectionState.Connected;
-
-  const isHidden = !isChatEnabled || !isOnline;
-
   const [value, setValue] = useState('');
   const { chatMessages: messages, send, isSending } = useChat();
   const [isPlay, setIsPlay] = useState(true);
   const pingSound = new Audio('/ping.mp3');
   const prevMessages = useRef(messages.length);
-
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (isMobile) {
-      onExpand();
-    }
-    if (isPlay && messages.length !== prevMessages.current) {
-      pingSound.play();
-    }
-    prevMessages.current = messages.length;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMobile, onExpand, messages.length, isPlay]);
+  const isOnline = participant && connectionState === ConnectionState.Connected;
+
+  const isHidden = !isChatEnabled || !isOnline;
 
   const reversedMessages = useMemo(() => {
     return messages.sort((a, b) => a.timestamp - b.timestamp);
@@ -88,6 +76,17 @@ export const Chat = ({
   const onChange = (value: string) => {
     setValue(value);
   };
+
+  useEffect(() => {
+    if (isMobile) {
+      onExpand();
+    }
+    if (isPlay && messages.length !== prevMessages.current) {
+      pingSound.play();
+    }
+    prevMessages.current = messages.length;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobile, onExpand, messages.length, isPlay]);
 
   return (
     <div className="flex flex-col bg-background  border-b border-l    h-[calc(100vh-80px)] lg:sticky lg:top-[80px] lg:mt-0 mt-4 lg:p-3 p-4   ">

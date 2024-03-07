@@ -16,21 +16,21 @@ export const ChatMessage = ({ data }: ChatMessageProps) => {
   const isOldMessage = today > other;
 
   return (
-    <div className="flex gap-2 p-2 rounded-md hover:bg-white/5">
-      <p className="text-sm text-white/40 whitespace-nowrap">
+    <div className=" space-x-2  p-2 rounded-md hover:bg-white/5">
+      <p className="text-sm inline text-white/40 whitespace-nowrap">
         {' '}
         {isOldMessage
           ? format(data.createdAt, 'MM.dd HH:mm')
           : format(data.createdAt, 'HH:mm')}
       </p>
 
-      <p className="text-sm font-semibold whitespace-nowrap">
+      <p className="text-sm inline font-semibold ">
         <span className="" style={{ color: color }}>
           {data.username}
         </span>
         :
       </p>
-      <p className="text-sm break-all">{data.content}</p>
+      <p className="text-sm inline break-words min-w-0">{data.content}</p>
     </div>
   );
 };

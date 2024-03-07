@@ -37,7 +37,7 @@ export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(
     }
 
     return (
-      <div className="flex flex-1 flex-col-reverse overflow-y-auto  bg-secondary/50 lg:rounded-none rounded-b-xl   ">
+      <div className="flex  flex-col-reverse overflow-y-auto  bg-secondary/50 lg:rounded-none rounded-b-xl   ">
         <Button
           className="lg:rounded-none rounded-b-xl text-muted-foreground"
           variant={'ghost'}
@@ -45,12 +45,15 @@ export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(
         >
           <ChevronDownIcon />
         </Button>
-        <ScrollArea>
+
+        <div className=" overflow-y-auto">
+          {/* <ScrollArea className='whitespace-nowrap ' > */}
           {mergeMessages.map((message) => (
             <ChatMessage key={message.id} data={message} />
           ))}
           <div ref={ref} />
-        </ScrollArea>
+          {/* </ScrollArea> */}
+        </div>
       </div>
     );
   },
