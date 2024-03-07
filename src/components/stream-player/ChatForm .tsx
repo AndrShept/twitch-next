@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
+import { Volume1, VolumeXIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import { EmojiPicker } from '../EmojiPicker';
@@ -18,6 +19,8 @@ interface ChatFormProps {
   isFollowing: boolean;
   isDelayed: boolean;
   isPending: boolean;
+  isPlay: boolean;
+  setIsPlay: (prev: boolean) => void;
 }
 
 export const ChatForm = ({
@@ -29,6 +32,8 @@ export const ChatForm = ({
   isFollowersOnly,
   isFollowing,
   isDelayed,
+  isPlay,
+  setIsPlay,
 }: ChatFormProps) => {
   const [isDelayBlocked, setIsDelayBlocked] = useState(false);
 
@@ -75,21 +80,46 @@ export const ChatForm = ({
           )}
         />
       </div>
-      <div className="ml-auto items-center flex gap-2">
-        <Button
-          type="button"
-          disabled={isPending}
-          className="rounded-full   h-[24px] w-[24px] p-1"
-          size={'icon'}
-         
-        >
-          <EmojiPicker
-            onChange={(emoji: string) => onChange(`${value} ${emoji}`)}
-          />
-        </Button>
-        <Button type="submit" size="sm" disabled={isDisabled}>
-          Chat
-        </Button>
+      <div className=" flex w-full  items-center justify-between      gap-2">
+        <div>
+          {isPlay && (
+            <Button
+            className='text-muted-foreground'
+              type="button"
+              onClick={() => setIsPlay(false)}
+              variant={'ghost'}
+              size={'icon'}
+            >
+              <Volume1 />
+            </Button>
+          )}
+          {!isPlay && (
+            <Button
+            className='text-muted-foreground'
+              type="button"
+              onClick={() => setIsPlay(true)}
+              variant={'ghost'}
+              size={'icon'}
+            >
+              <VolumeXIcon />
+            </Button>
+          )}
+        </div>
+        <div className="flex items-center gap-3">
+          <Button
+            type="button"
+            disabled={isPending}
+            className="rounded-full h-[24px] w-[24px] p-1"
+            size={'icon'}
+          >
+            <EmojiPicker
+              onChange={(emoji: string) => onChange(`${value} ${emoji}`)}
+            />
+          </Button>
+          <Button type="submit" size="sm" disabled={isDisabled}>
+            Chat
+          </Button>
+        </div>
       </div>
     </form>
   );

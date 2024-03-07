@@ -9,6 +9,7 @@ import {
 } from '@livekit/components-react';
 import { ConnectionState } from 'livekit-client';
 import { useEffect, useMemo, useRef, useState } from 'react';
+// import useSound from 'use-sound';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { ChatCommunity } from './ChatCommunity ';
@@ -49,6 +50,9 @@ export const Chat = ({
 
   const [value, setValue] = useState('');
   const { chatMessages: messages, send, isSending } = useChat();
+  const [isPlay, setIsPlay] = useState(true);
+  const pingSound = new Audio('/ping.mp3');
+  const prevMessages = useRef(messages.length);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -56,7 +60,13 @@ export const Chat = ({
     if (isMobile) {
       onExpand();
     }
-  }, [isMobile, onExpand]);
+    if (isPlay && messages.length !== prevMessages.current) {
+      pingSound.play();
+    }
+    prevMessages.current = messages.length;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobile, onExpand, messages.length, isPlay]);
+
   const reversedMessages = useMemo(() => {
     return messages.sort((a, b) => a.timestamp - b.timestamp);
   }, [messages]);
@@ -91,6 +101,8 @@ export const Chat = ({
             isHidden={isHidden}
           />
           <ChatForm
+            isPlay={isPlay}
+            setIsPlay={setIsPlay}
             isPending={isSending}
             onSubmit={onSubmit}
             value={value}
