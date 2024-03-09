@@ -17,7 +17,7 @@ export const ChatMessage = ({ data }: ChatMessageProps) => {
 
   return (
     <div className=" space-x-2  p-2 rounded-md hover:bg-white/5">
-      <p className="text-xs inline text-white/40 whitespace-nowrap">
+      <p className="text-[12px] inline text-white/40 whitespace-nowrap">
         {' '}
         {isOldMessage
           ? format(data.createdAt, 'MM.dd HH:mm')
