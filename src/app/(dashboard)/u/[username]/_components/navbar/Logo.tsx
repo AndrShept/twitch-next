@@ -13,8 +13,8 @@ export const Logo = () => {
           <Image alt="logo_image" src="/logo4.png" height={40} width={40} />
         </div>
         <div className={`${poppins.className} lg:block hidden`}>
-          <p className="text-lg font-semibold">Gamehub</p>
-          <p className="text-muted-foreground">Lets play</p>
+          <p className="text-lg font-semibold">Steam Verse</p>
+          <p className="text-muted-foreground">Lets Go</p>
         </div>
       </section>
     </Link>

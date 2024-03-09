@@ -3,7 +3,7 @@
 import { stringToColor } from '@/lib/utils';
 import { Chat } from '@prisma/client';
 import { format } from 'date-fns';
-import { useRef } from 'react';
+
 
 interface ChatMessageProps {
   data: Chat;
@@ -17,7 +17,7 @@ export const ChatMessage = ({ data }: ChatMessageProps) => {
 
   return (
     <div className=" space-x-2  p-2 rounded-md hover:bg-white/5">
-      <p className="text-sm inline text-white/40 whitespace-nowrap">
+      <p className="text-xs inline text-white/40 whitespace-nowrap">
         {' '}
         {isOldMessage
           ? format(data.createdAt, 'MM.dd HH:mm')
@@ -30,7 +30,7 @@ export const ChatMessage = ({ data }: ChatMessageProps) => {
         </span>
         :
       </p>
-      <p className="text-sm inline break-words min-w-0">{data.content}</p>
+      <p className="text-sm inline break-words">{data.content}</p>
     </div>
   );
 };

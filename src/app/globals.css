@@ -90,10 +90,10 @@ body,
   }
 
   *::-webkit-scrollbar-track {
-    @apply bg-secondary/40 ;
+    @apply bg-secondary/50 ;
   }
   *::-webkit-scrollbar-thumb {
-    @apply bg-primary/70 rounded-sm ;
+    @apply bg-primary/70 hover:bg-primary transition rounded-sm ;
   }
   *::-webkit-scrollbar {
     @apply w-[8px];

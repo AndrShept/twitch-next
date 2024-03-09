@@ -7,7 +7,6 @@ import { ReceivedChatMessage } from '@livekit/components-react';
 import { ChevronDownIcon } from 'lucide-react';
 import { forwardRef } from 'react';
 
-import { Spinner } from '../Spinner';
 import { Button } from '../ui/button';
 import { ScrollArea } from '../ui/scroll-area';
 import { ChatMessage } from './ChatMessage ';
@@ -46,7 +45,7 @@ export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(
           <ChevronDownIcon />
         </Button>
 
-        <div className=" overflow-y-auto">
+        <div className=" overflow-y-auto ">
           {/* <ScrollArea className='whitespace-nowrap ' > */}
           {mergeMessages.map((message) => (
             <ChatMessage key={message.id} data={message} />

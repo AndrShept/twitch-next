@@ -30,7 +30,7 @@ export const ResultCard = ({ stream }: ResultCardProps) => {
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
       >
-        <div className="flex gap-x-4 rounded-xl px-4 py-10 hover:border-primary border w-fit bg-secondary/30 transition">
+        <div className="flex gap-x-4 rounded-xl md:px-4 px-2 py-10 hover:border-primary border w-fit bg-secondary/30 transition">
           <div className="relative h-[9rem] w-[16rem]">
             <Thumbnail
               thumbnailUrl={stream.thumbnailUrl}
