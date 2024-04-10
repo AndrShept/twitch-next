@@ -10,8 +10,8 @@ interface CreatorLayoutProps {
   children: ReactNode;
 }
 
-const CreatorLayout = ({ params, children }: CreatorLayoutProps) => {
-  const self = getSelfByUserName();
+const CreatorLayout = async({ params, children }: CreatorLayoutProps) => {
+  const self = await getSelfByUserName();
   if (!self) {
     redirect('/');
   }
